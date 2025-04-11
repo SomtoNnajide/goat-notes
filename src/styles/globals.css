@@ -44,6 +44,10 @@
 }
 
 :root {
+  --color-success-bg: #d1fae5; 
+  --color-success-text: #065f46;
+  --color-error-bg: #fee2e2;
+  --color-error-text: #991b1b; 
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
@@ -79,6 +83,10 @@
 }
 
 .dark {
+  --color-success-bg: #00994a; 
+  --color-success-text: #e9f0ee; 
+  --color-error-bg: #a31111; 
+  --color-error-text: #e9f0ee;
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
   --card: oklch(0.208 0.042 265.755);
@@ -120,3 +128,4 @@
     @apply bg-background text-foreground;
   }
 }
+
