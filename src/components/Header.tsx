@@ -6,7 +6,7 @@ import DarkModeToggle from "./DarkModeToggle";
 import LogOutButton from "./LogOutButton";
 
 function Header() {
-    const user = null;
+    const user = true;
 
     return (
         <header
