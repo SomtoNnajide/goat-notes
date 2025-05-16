@@ -5,6 +5,7 @@ import { Textarea } from "./ui/textarea"
 import { useSearchParams } from "next/navigation"
 import { ChangeEvent, useEffect } from "react"
 import useNote from "@/hooks/useNote"
+import { updateNoteAction } from "@/actions/notes"
 
 type Props = {
     noteId: string,
