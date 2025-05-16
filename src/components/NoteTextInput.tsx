@@ -4,6 +4,7 @@ import { debounceTimeout } from "@/lib/constants"
 import { Textarea } from "./ui/textarea"
 import { useSearchParams } from "next/navigation"
 import { ChangeEvent, useEffect } from "react"
+import useNote from "@/hooks/useNote"
 
 type Props = {
     noteId: string,
