@@ -1,5 +1,9 @@
 import { getUser } from "@/auth/server"
 import { prisma } from "@/db/prisma"
+import AskAIButton from "@/components/AskAIButton"
+import NewNoteButton from "@/components/NewNoteButton"
+import NoteTextInput from "@/components/NoteTextInput"
+import FallbackUI from "@/components/FallbackUI"
 
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -13,9 +17,20 @@ async function HomePage({ searchParams }: Props) {
   ? noteIdParam![0]
   : noteIdParam || ""
 
-  const note = await prisma.note.findUnique({
-    where: {id: noteId, authorId: user?.id}
-  })
+  let note = null
+
+  try{
+    note = await prisma.note.findUnique({
+      where: {
+        id: noteId,
+        authorId: user?.id
+      }
+    })
+  } catch(error){
+    if(error instanceof Error){
+      return <FallbackUI error={error} />
+    }
+  }
 
   return (
     <div className="flex h-full flex-col items-center gap-4">

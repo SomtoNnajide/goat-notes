@@ -25,7 +25,7 @@ async function Header() {
             />
 
             <h1 className="flex flex-col pb-1 text-2xl leading-6 font-semibold">
-            GOAT <span>Notes</span>
+            Intelli <span>Notes</span>
             </h1>
         </Link>
 

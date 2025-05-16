@@ -7,7 +7,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/AppSidebar";
 
 export const metadata: Metadata = {
-  title: "GOAT Notes",
+  title: "Intelli Notes",
 };
 
 export default function RootLayout({

@@ -9,21 +9,28 @@ import { prisma } from "@/db/prisma"
 import { Note } from "@prisma/client"
 import Link from "next/link"
 import SidebarGroupContent from "./SidebarGroupContent"
+import FallbackUI from "./FallbackUI"
 
 async function AppSidebar() {
     const user = await getUser()
 
     let notes: Note[] = []
 
-    if(user){
-        notes = await prisma.note.findMany({
-            where: {
-                authorId: user.id
-            },
-            orderBy: {
-                updatedAt: "desc"
-            }
-        })
+    try{
+        if(user){
+            notes = await prisma.note.findMany({
+                where: {
+                    authorId: user.id
+                },
+                orderBy: {
+                    updatedAt: "desc"
+                }
+            })
+        }
+    } catch(error){
+        if(error instanceof Error){
+            return <FallbackUI error={error} />
+        }
     }
 
     return (
