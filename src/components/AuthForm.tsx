@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import React, { useTransition } from "react";
 import { CardContent, CardFooter } from "./ui/card";
 import { Label } from "./ui/label";
@@ -10,6 +9,7 @@ import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { loginAction, signUpAction } from "@/actions/users";
+import { errorToast, successToast } from "@/actions/toasts";
 
 type Props = {
     type: "login" | "signUp";
@@ -41,23 +41,11 @@ function AuthForm({ type }: Props) {
             }
 
             if(!errorMessage){
-                toast.success(title, {
-                    style: {
-                        background: "var(--color-success-bg)",
-                        color: "var(--color-success-text)",
-                    },
-                    description: description
-                })
+                successToast(title, description)
 
                 router.replace("/")
             } else {
-                toast.error(title, {
-                    style: {
-                        background: "var(--color-error-bg)",
-                        color: "var(--color-error-text)"
-                    },
-                    description: errorMessage
-                })
+                errorToast("Invalid Credentials", errorMessage)
             }
         })
     };

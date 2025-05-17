@@ -6,8 +6,8 @@ import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
-import { toast } from "sonner"
 import { createNoteAction } from "@/actions/notes"
+import { errorToast, successToast } from "@/actions/toasts"
 
 type Props = {
     user: User | null
@@ -19,6 +19,8 @@ function NewNoteButton({ user }: Props) {
 
     const handleClickNewNoteButton = async () => {
         if(!user){
+            errorToast("Not logged in", "You must be logged in to create a note")
+            
             router.push("/login")
         } else {
             setLoading(true)
@@ -27,13 +29,7 @@ function NewNoteButton({ user }: Props) {
             await createNoteAction(uuid)
             router.push(`/?noteId=${uuid}`)
 
-            toast.success("New Note Created", {
-                style: {
-                    background: "var(--color-success-bg)",
-                    color: "var(--color-success-text)",
-                },
-                description: "You have created a new note"
-            })
+            successToast("New Note Created", "You have created a new note")
 
             setLoading(false)
         }
