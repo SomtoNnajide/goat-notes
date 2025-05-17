@@ -74,6 +74,7 @@ function DeleteNoteButton( { noteId, deleteNoteLocally }: Props) {
                     {isPending ? <Loader2 className="animate-spin" /> : "Delete"}
                 </AlertDialogAction>
                 </AlertDialogFooter>
+                
             </AlertDialogContent>
         </AlertDialog>
     )
