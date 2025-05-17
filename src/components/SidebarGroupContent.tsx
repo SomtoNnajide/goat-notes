@@ -50,7 +50,6 @@ function SidebarGroupContent({ notes }: Props) {
                 {filteredNotes.map((note) => (
                     <SidebarMenuItem key={note.id} className="group/item">
                         <SelectNoteButton note={note} />
-
                         <DeleteNoteButton noteId={note.id} deleteNoteLocally={deleteNoteLocally} />
                     </SidebarMenuItem>
                 ))}

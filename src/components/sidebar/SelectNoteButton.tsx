@@ -17,6 +17,7 @@ function SelectNoteButton({ note }: Props) {
     const { noteText: selectedNoteText } = useNote()
     const [shouldUseGlobalNoteText, setShouldUseGlobalNoteText] = useState(false)
     const [localNoteText, setLocalNoteText] = useState(note.text)
+    const [formattedDate, setFormattedDate] = useState<string>("")
 
     useEffect(() => {
         if(noteId === note.id){
@@ -31,6 +32,10 @@ function SelectNoteButton({ note }: Props) {
             setLocalNoteText(selectedNoteText)
         }
     }, [shouldUseGlobalNoteText, selectedNoteText])
+
+    useEffect(() => {
+        setFormattedDate(note.updatedAt.toLocaleDateString())
+    }, [note.updatedAt])
 
     const blankNoteText = "EMPTY NOTE"
     let noteText = localNoteText || blankNoteText
@@ -48,7 +53,7 @@ function SelectNoteButton({ note }: Props) {
                     {noteText}
                 </p>
                 <p className="text-muted-foreground text-xs">
-                    Updated at {note.updatedAt.toLocaleDateString()}
+                    Updated at {formattedDate || 'Loading...'}
                 </p>
             </Link>
         </SidebarMenuButton>
