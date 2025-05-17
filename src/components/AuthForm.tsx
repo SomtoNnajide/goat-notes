@@ -9,7 +9,7 @@ import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { loginAction, signUpAction } from "@/actions/users";
-import { errorToast, successToast } from "@/actions/toasts";
+import { errorToast, successToast } from "@/lib/utils";
 
 type Props = {
     type: "login" | "signUp";

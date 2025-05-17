@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { createNoteAction } from "@/actions/notes"
-import { errorToast, successToast } from "@/actions/toasts"
+import { errorToast, successToast } from "@/lib/utils";
 
 type Props = {
     user: User | null

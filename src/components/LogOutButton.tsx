@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { logOutAction } from "@/actions/users";
-import { errorToast, successToast } from "@/actions/toasts";
+import { errorToast, successToast } from "@/lib/utils";
 
 function LogOutButton() {
     const router = useRouter()
