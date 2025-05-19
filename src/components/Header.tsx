@@ -17,13 +17,12 @@ async function Header() {
         >
         <SidebarTrigger className="absolute left-1 top-1"/>
 
-        <Link className="flex items-end gap-2" href="/">
+        <Link className="flex items-center gap-0" href="/">
             <Image
-            src="/goatius.png"
-            height={60}
-            width={60}
+            src="/intelli-notes-logo.png"
+            height={80}
+            width={110}
             alt="logo"
-            className="rounded-full"
             priority
             />
 
@@ -38,12 +37,12 @@ async function Header() {
             ) : (
             <>
                 <Button asChild>
-                <Link href="/sign-up" className="hidden sm:block">
-                    Sign Up
-                </Link>
+                    <Link href="/sign-up" className="hidden sm:block">
+                        Sign Up
+                    </Link>
                 </Button>
                 <Button asChild variant="outline">
-                <Link href="/login">Login</Link>
+                    <Link href="/login">Login</Link>
                 </Button>
             </>
             )}

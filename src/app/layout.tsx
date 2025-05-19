@@ -4,11 +4,11 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/Header";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import AppSidebar from "@/components/AppSidebar";
+import AppSidebar from "@/components/sidebar/AppSidebar";
 import NoteProvider from "@/providers/NoteProvider";
 
 export const metadata: Metadata = {
-  title: "Intelli Notes",
+  title: "Intelli Notes"
 };
 
 export default function RootLayout({
@@ -20,10 +20,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
           <NoteProvider>
             <SidebarProvider>
@@ -38,7 +38,7 @@ export default function RootLayout({
 
             <Toaster />
           </NoteProvider>
-      </ThemeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

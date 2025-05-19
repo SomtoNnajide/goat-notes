@@ -57,7 +57,7 @@ export async function updateSession(request: NextRequest) {
           //Build url and redirect
           const url = request.nextUrl.clone()
           url.searchParams.set("noteId", newestNoteId)
-          return NextResponse.redirect(url)
+          return NextResponse.redirect(url) //reroutes to newest note in db
         } else {
           const { noteId } = await fetch(
             `${process.env.NEXT_PUBLIC_BASE_URL}/api/create-new-note?userId=${user.id}`, 
@@ -70,7 +70,7 @@ export async function updateSession(request: NextRequest) {
 
           const url = request.nextUrl.clone()
           url.searchParams.set("noteId", noteId)
-          return NextResponse.redirect(url)
+          return NextResponse.redirect(url) //reroutes to empty note
         }
     }
   }
