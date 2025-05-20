@@ -14,6 +14,9 @@ import { useRouter } from "next/navigation"
 import { Fragment, useRef, useState, useTransition } from "react"
 import { Textarea } from "./ui/textarea"
 import { ArrowUpIcon } from "lucide-react"
+import { askAIAboutNotesAction } from "@/actions/notes"
+import "@/styles/ai-response.css"
+import { errorToast } from "@/lib/utils"
 
 type Props = {
     user: User | null
@@ -31,6 +34,8 @@ function AskAIButton({ user }: Props) {
 
     const handleOnOpenChange = (isOpen: boolean) => {
         if(!user){
+            errorToast("Not logged in", "You must be logged in to ask AI a question")
+
             router.push('/login')
         } else {
             if(isOpen){
@@ -59,7 +64,19 @@ function AskAIButton({ user }: Props) {
     }
 
     const handleSubmit = () => {
-        console.log('submit')
+        if(!questionText.trim()) return 
+
+        const newQuestions = [...questions, questionText]
+
+        setQuestions(newQuestions)
+        setQuestionText("")
+        setTimeout(scrollToBottom, 100)
+
+        startTransition(async () => {
+            const response = await askAIAboutNotesAction(newQuestions, responses)
+            setResponses((prev) => [...prev, response])
+            setTimeout(scrollToBottom, 100)
+        })
     }
 
     const scrollToBottom = () => {
