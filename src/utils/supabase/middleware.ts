@@ -1,3 +1,4 @@
+import { createNewNote, getNewestNoteId } from "@/lib/note-utils";
 import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -49,9 +50,11 @@ export async function updateSession(request: NextRequest) {
     } = await supabase.auth.getUser()
 
     if(user){
-      const { newestNoteId } = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/fetch-newest-note?userId=${user.id}`)
-        .then((res) => res.json())
+      // const { newestNoteId } = await fetch(
+      //   `${process.env.NEXT_PUBLIC_BASE_URL}/api/fetch-newest-note?userId=${user.id}`)
+      //   .then((res) => res.json())
+
+      const newestNoteId = await getNewestNoteId(user.id)
         
         if(newestNoteId){
           //Build url and redirect
@@ -59,14 +62,15 @@ export async function updateSession(request: NextRequest) {
           url.searchParams.set("noteId", newestNoteId)
           return NextResponse.redirect(url) //reroutes to newest note in db
         } else {
-          const { noteId } = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/create-new-note?userId=${user.id}`, 
-            {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }).then((res) => res.json())
+          // const { noteId } = await fetch(
+          //   `${process.env.NEXT_PUBLIC_BASE_URL}/api/create-new-note?userId=${user.id}`, 
+          //   {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json'
+          //   }
+          // }).then((res) => res.json())
+          const noteId = await createNewNote(user.id)
 
           const url = request.nextUrl.clone()
           url.searchParams.set("noteId", noteId)
