@@ -1,34 +1,34 @@
-import { getUser } from "@/auth/server"
-import { prisma } from "@/db/prisma"
-import AskAIButton from "@/components/AskAIButton"
-import NewNoteButton from "@/components/NewNoteButton"
-import NoteTextInput from "@/components/NoteTextInput"
-import FallbackUI from "@/components/FallbackUI"
+import { getUser } from "@/auth/server";
+import { prisma } from "@/db/prisma";
+import AskAIButton from "@/components/assets/AskAIButton";
+import NewNoteButton from "@/components/assets/NewNoteButton";
+import NoteTextInput from "@/components/assets/NoteTextInput";
+import FallbackUI from "@/components/handle-error-ui/FallbackUI";
 
 type Props = {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
 async function HomePage({ searchParams }: Props) {
-  const noteIdParam = (await searchParams).noteId
-  const user = await getUser()
+  const noteIdParam = (await searchParams).noteId;
+  const user = await getUser();
 
   const noteId = Array.isArray(noteIdParam)
-  ? noteIdParam![0]
-  : noteIdParam || ""
+    ? noteIdParam![0]
+    : noteIdParam || "";
 
-  let note = null
+  let note = null;
 
-  try{
+  try {
     note = await prisma.note.findUnique({
       where: {
         id: noteId,
-        authorId: user?.id
-      }
-    })
-  } catch(error){
-    if(error instanceof Error){
-      return <FallbackUI error={error} />
+        authorId: user?.id,
+      },
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return <FallbackUI error={error} />;
     }
   }
 
@@ -41,7 +41,7 @@ async function HomePage({ searchParams }: Props) {
 
       <NoteTextInput noteId={noteId} startingNoteText={note?.text || ""} />
     </div>
-  )
+  );
 }
 
 export default HomePage;

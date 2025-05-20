@@ -1,11 +1,11 @@
 import { shadow } from "@/styles/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import DarkModeToggle from "./DarkModeToggle";
+import { Button } from "../ui/button";
+import DarkModeToggle from "../misc/DarkModeToggle";
 import LogOutButton from "./LogOutButton";
 import { getUser } from "@/auth/server";
-import { SidebarTrigger } from "./ui/sidebar";
+import { SidebarTrigger } from "../ui/sidebar";
 
 async function Header() {
     const user = await getUser()
