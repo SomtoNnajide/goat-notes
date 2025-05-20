@@ -13,7 +13,7 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      "react/no-unescaped-entities": "off" //allow the use of apostrophes
+      "react/no-unescaped-entities": "off", 
     }
   }
 ];
