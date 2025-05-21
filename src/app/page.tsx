@@ -24,7 +24,7 @@ async function HomePage({ searchParams }: Props) {
       where: {
         id: noteId,
         authorId: user?.id,
-      },
+      }, 
     });
   } catch (error) {
     if (error instanceof Error) {
