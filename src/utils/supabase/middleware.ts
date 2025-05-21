@@ -8,8 +8,8 @@ export async function updateSession(request: NextRequest) {
     });
 
   const supabase = createServerClient(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_ANON_KEY!,
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
       cookies: {
           getAll() {
@@ -53,8 +53,8 @@ export async function updateSession(request: NextRequest) {
       // const { newestNoteId } = await fetch(
       //   `${process.env.NEXT_PUBLIC_BASE_URL}/api/fetch-newest-note?userId=${user.id}`)
       //   .then((res) => res.json())
-
-      const newestNoteId = await getNewestNoteId(user.id)
+      
+        const newestNoteId = await getNewestNoteId(user.id)
         
         if(newestNoteId){
           //Build url and redirect

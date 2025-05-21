@@ -1,4 +1,3 @@
-// lib/note-utils.ts
 import { prisma } from "@/db/prisma";
 
 export async function getNewestNoteId(userId: string): Promise<string | null> {
